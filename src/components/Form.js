@@ -1,4 +1,15 @@
+import { useState } from "react";
+
+const initialUserInput = {
+  "current-savings": 1000,
+  "yearly-contribution": 1200,
+  "expected-return": 8,
+  duration: 10,
+};
+
 function Form() {
+  const [userInput, setUserInput] = useState(initialUserInput);
+
   const calculateHandler = (userInput) => {
     // Should be triggered when form is submitted
     // You might not directly want to bind it to the submit event on the form though...
@@ -27,15 +38,21 @@ function Form() {
   };
 
   const resetHandler = () => {
-    console.log("Clearing input form...");
+    setUserInput(initialUserInput);
   };
 
   const submitHandler = (event) => {
     event.preventDefault();
-    calculateHandler();
+    calculateHandler(userInput);
   };
 
   const changeHandler = (input, value) => {
+    setUserInput((prevInput) => {
+      return {
+        ...prevInput,
+        [input]: value,
+      };
+    });
     console.log(input + ": " + value);
   };
 
@@ -49,6 +66,7 @@ function Form() {
               onChange={(event) =>
                 changeHandler("current-savings", event.target.value)
               }
+              value={userInput["current-savings"]}
               type="number"
               id="current-savings"
             />
@@ -59,6 +77,7 @@ function Form() {
               onChange={(event) =>
                 changeHandler("yearly-contribution", event.target.value)
               }
+              value={userInput["yearly-contribution"]}
               type="number"
               id="yearly-contribution"
             />
@@ -73,6 +92,7 @@ function Form() {
               onChange={(event) =>
                 changeHandler("expected-return", event.target.value)
               }
+              value={userInput["expected-return"]}
               type="number"
               id="expected-return"
             />
@@ -83,6 +103,7 @@ function Form() {
               onChange={(event) =>
                 changeHandler("duration", event.target.value)
               }
+              value={userInput["duration"]}
               type="number"
               id="duration"
             />

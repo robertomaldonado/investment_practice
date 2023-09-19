@@ -1,4 +1,4 @@
-function Table() {
+const Table = (props) => {
   return (
     <div>
       <table className="result">
@@ -23,6 +23,6 @@ function Table() {
       </table>
     </div>
   );
-}
+};
 
 export default Table;
