@@ -1,6 +1,6 @@
-import Header from "./components/Header";
-import Form from "./components/Form";
-import Table from "./components/Table";
+import Header from "./components/Header/Header";
+import Form from "./components/Form/Form";
+import Table from "./components/Table/Table";
 import { useState } from "react";
 
 function App() {
@@ -36,9 +36,10 @@ function App() {
       <Header />
       <Form onCalculate={calculateHandler} />
 
-      {/* Todo: Show below table conditionally (only once result data is available) */}
       {/* Show fallback text if no data is available */}
-      {!userInput && <p>No investment calculated yet</p>}
+      {!userInput && (
+        <p style={{ textAlign: "center" }}>No investment calculated yet</p>
+      )}
       {userInput && (
         <Table
           data={yearlyData}
